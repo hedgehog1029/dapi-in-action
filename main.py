@@ -6,6 +6,8 @@ import discord
 from discord.ext import commands
 import logging
 
+from .stars import Star, StarQueue
+
 
 class DIA(commands.Bot):
 
@@ -17,6 +19,13 @@ class DIA(commands.Bot):
 
         self.prefixes = prefixes
         self.tokens = self.find_tokens()
+
+        self.stars = StarQueue()
+        # Queue of stars that the bot can append new stars onto
+        # and the Reddit posting module can pull stars from
+        # Both can work independently and simultaneously
+        # self.stars.append(Star(...)) - Add a star to be posted
+        # self.stars.pop() - Get next star to post to Reddit
 
         self.presence = discord.Game(name=f'dapi-in-action | DIA-')
 
@@ -42,6 +51,15 @@ class DIA(commands.Bot):
     async def on_ready(self):
         self.logger.info("Hello DAPI!")
         self.logger.debug(f"Logged in at {datetime.now()}")
+
+    async def on_message(self, message):
+        """
+        Detect new stars and append them to the queue
+        """
+        # TODO: Do the above
+        # When appending stars to the queue, use the Star class, so that the data is in a consistent format for
+        # the reddit module
+        pass
 
 
 if __name__ == '__main__':
