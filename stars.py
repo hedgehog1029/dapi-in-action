@@ -4,7 +4,7 @@ class Star:
     Represents a Starred message
     """
 
-    def __init__(self, message_id, author, title, content, img_url):
+    def __init__(self, message_id: int, author: str, title: str, content: str, img_url: str):
         self.message_id = message_id
         self.author = author
         self.title = title
